@@ -114,6 +114,7 @@ export class HttpService {
   * @description:
   */
   private __map_response(response: any, request__type='post'): any {
+    // if (response === null || response === undefined) { return; }
     // this.snackbar.httpResponseTraitment(response);
     if (response.success) {
 
@@ -184,43 +185,13 @@ export class HttpService {
     );
   }
 
-  /**
-   * @description:
-   * @param url 
-   * @param header 
-   * @returns 
-   */
-  public strapiPost(url:string, params:any, header:any=undefined): any {
-    url = this.addBaseUrl(this.strapi_domain, url);
-    return this.http.post(url, params, this.__jsonOptions()).pipe(
-      map(response => {
-        return this.__map_response(response, 'post');
-      })
-    );
-  }
-
   /*
   * @description:
   */
   public get(url:string, header:any=undefined): any {
     return this.http.get(url, this.__defaultOptions()).pipe(
       map(response => {
-        return this.__map_response(response, 'get');
-      })
-    );
-  }
-
-  /**
-   * @description: 
-   * @param url 
-   * @returns 
-   */
-  public strapiGet(url:string, queryParams: any={}, header:any=undefined): any {
-    url = this.addBaseUrl(this.strapi_domain, url);
-    url += this.generateQueryParams(queryParams);
-    return this.http.get(url, this.__jsonOptions()).pipe(
-      map(response => {
-        return this.__map_response(response, 'get');
+          return this.__map_response(response, 'get');
       })
     );
   }
