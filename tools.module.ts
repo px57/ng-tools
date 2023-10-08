@@ -6,6 +6,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibsService } from 'src/modules/tools/services/libs.service';
 import { ComponentInjectorComponent } from 'src/modules/tools/components/component-injector/component-injector.component';
+import { WebsocketService } from './services/websocket.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ComponentInjectorComponent } from 'src/modules/tools/components/compone
   providers: [
     HttpService,
     LibsService,
+    WebsocketService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   exports: [
