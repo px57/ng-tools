@@ -8,9 +8,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
-// import { SnackbarService } from './snackbar.service';
-// import { UserService } from './user.service';
-
 const localhost = ['127.0.0.1:4200', 'localhost:4200'];
 
 /**
@@ -91,7 +88,7 @@ export class HttpService {
         'headers': new HttpHeaders({
           'X-Requested-With': 'XMLHttpRequest',
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Bearer ${this.userService.getJwtToken()}`,
+          // 'Authorization': `Bearer ${this.userService.getJwtToken()}`,
          }),
         'withCredentials': true,
     };
