@@ -32,22 +32,7 @@ export class WebsocketService {
   /** 
    * @description:
    */
-  private websocket_config: Array<WebSocketsConfig> = [ ];
-
-  // /**
-  //  * @description: 
-  //  */
-  // private websocket_config: Array<WebSocketsConfig> = [
-  //   {
-  //     port: 4242,
-  //     pathname: 'ws/chatroom/?room=fr&fakeConnect=true',
-  //     service: ChatroomService,
-  //   },
-  //   {
-  //     port: 4242,
-  //     pathname: 'ws/playroom/?room=fr&fakeConnect=true',
-  //   }
-  // ];
+  private websocket_config: Array<WebSocketsConfig> = [];
 
   /**
    * @description: 
@@ -55,14 +40,7 @@ export class WebsocketService {
   constructor(
     private router: Router,
     private l: LibsService,
-    // public chatroomService: ChatroomService,
-    // public playroomService: PlayroomService,
-  ) {
-    // this.completeWebsocketConfig();
-    // for (const ws_config of this.websocket_config) {
-    //   this.connection(ws_config);
-    // }
-  }
+  ) { }
 
   /**
    * @description: Injection des elements essentielles a la configuration du websocket.
@@ -86,7 +64,9 @@ export class WebsocketService {
    * @description: Ici ont souscrit au différents éléments à envoyer et recevoir.
    */
   public connection(ws_config: WebSocketsConfig): void {
-    const url = this.getWebsocketUrl(ws_config)
+    console.log(ws_config);
+    // alert (this.l.getCookie('sessionid'));
+    const url = this.getWebsocketUrl(ws_config);
     ws_config.wsStream = webSocket(url);
     ws_config.wsStream.subscribe(
       (msg: any) => '', // Called whenever there is a message from the server.
