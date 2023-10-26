@@ -936,5 +936,5 @@ export class LibsService {
     let expires = "expires="+d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
-    
+
 }
