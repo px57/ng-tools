@@ -111,7 +111,10 @@ export class WebsocketService {
    * @description:
    */
   private getWebsocketUrl(ws_config: WebSocketsConfig): string {
-    return `${this.get_protocol()}${this.l.get_host()}:${ws_config.port}/${
+    // return `${this.get_protocol()}${this.l.get_host()}:${ws_config.port}/${
+    //   ws_config.pathname
+    // }`
+    return `${this.get_protocol()}${this.l.get_host()}/${
       ws_config.pathname
     }`
   }
@@ -120,8 +123,9 @@ export class WebsocketService {
    * @description:
    */
   private get_protocol(): string {
+    console.log( "get_protocol : ", window.location.protocol)
     if (window.location.protocol === 'https:') {
-      return 'ws://'
+      return 'wss://'
     }
     return 'ws://'
   }
