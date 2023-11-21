@@ -107,24 +107,31 @@ export class WebsocketService {
     }, 1000)
   }
 
-  
+  // private getWebsocketUrl(ws_config: WebSocketsConfig): string {
+  //   return `${this.get_protocol()}${this.l.get_host()}:${ws_config.port}/${
+  //     ws_config.pathname
+  //   }`
+  // }
   /**
    * @description:
    */
   private getWebsocketUrl(ws_config: WebSocketsConfig): string {
-    // return `${this.get_protocol()}${this.l.get_host()}:${ws_config.port}/${
-    //   ws_config.pathname
-    // }`
-    return `${this.get_protocol()}${this.l.get_host()}/${
-      ws_config.pathname
-    }`
+    
+    // Check if the current base URL is the production URL
+    const isProduction = window.location.hostname === 'app.haliro.io';
+    const protocol = this.get_protocol();
+    const host = isProduction ? this.l.get_host() : `${this.l.get_host()}:9001`;
+
+    console.log( "getWebsocketUrl : ", `${protocol}${host}/${ws_config.pathname}`)
+
+    return `${protocol}${host}/${ws_config.pathname}`;
   }
 
   /**
    * @description:
    */
   private get_protocol(): string {
-    console.log( "get_protocol : ", window.location.protocol)
+
     if (window.location.protocol === 'https:') {
       return 'wss://'
     }
