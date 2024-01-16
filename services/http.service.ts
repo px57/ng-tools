@@ -126,6 +126,8 @@ export class HttpService {
   * @description:
   */
   private __encodeObjectParams(key: string, encode_object: any): Array<string> {
+
+    if (!encode_object) return [];
     let resp: Array<string>  = [];
 
     for (let into_key of Object.keys(encode_object)) {
@@ -148,6 +150,7 @@ export class HttpService {
   * @description:
   */
   private __encodeParams(raw_params: any) {
+      if (!raw_params) return '';
       let body: URLSearchParams = new URLSearchParams();
       let encode_object: any = {};
       for(let key in raw_params) {
@@ -174,6 +177,7 @@ export class HttpService {
   * @description:
   */
   public post(url:string, params:any, header:any=undefined): any {
+    console.log('aqui')
     url = this.addBaseUrl(this.domain, url);
     return this.http.post(url, this.__encodeParams(params), this.__defaultOptions()).pipe(
       map(response => {
@@ -181,6 +185,17 @@ export class HttpService {
       })
     );
   }
+  public post2(url: string, params: any, options: any = {}): any {
+      url = this.addBaseUrl(this.domain, url);
+      
+      // Utiliza as opções diretamente, que podem incluir cabeçalhos
+      return this.http.post(url, params, options).pipe(
+          map(response => {
+              return this.__map_response(response, 'post');
+          })
+      );
+  }
+
 
   /*
   * @description:
